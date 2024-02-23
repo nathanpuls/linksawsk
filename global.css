@@ -63,3 +63,12 @@ a.menu:hover {
   .center {
     text-align: center;
   }
+
+  ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove default padding */
+  }
+
+  li {
+    margin-bottom: 10px; /* Optional spacing between items */
+  }
