@@ -1,7 +1,6 @@
-<!-- Links.svelte -->
 <script>
   import { onMount } from "svelte";
-  import app from "../../firebase"; // Adjust the path accordingly
+  import app from "../../firebase";
   import { getDatabase, ref, onValue } from "firebase/database";
   import { addHttpIfMissing } from "../../utils";
   import { stusername } from '$stores/username';
@@ -16,22 +15,19 @@
   onMount(() => {
     username = localStorage.getItem("username");
     const db = getDatabase(app);
-    const userLinksRef = ref(db, `users/${username}/links`); // Adjust the path accordingly
-    const fbPath = `users/${username}/links`;
-    console.log(fbPath);
-    console.log(username);
+    const userLinksRef = ref(db, `users/${username}/links`);
     atusername = `@${username}`;
-    
 
     onValue(userLinksRef, (snapshot) => {
       const data = snapshot.val();
       linksData = data ? Object.entries(data) : [];
+      // Sort the linksData array based on the timestamp property in descending order
+      linksData.sort((a, b) => b[1].timestamp - a[1].timestamp);
     });
   });
 </script>
 
 <main>
-  <!-- <h1>{$storeusername}</h1> -->
   <h4><User/></h4>
   <h4>{atusername}</h4>
   <a href="/addlink"><button>Add link</button></a>
