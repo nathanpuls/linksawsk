@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "m": "yarn dev --open",
+    "dev": "vite dev",
+    "build": "vite build",
+    "deploy": "gh-pages -d build -t true"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.1",
+    "@sveltejs/kit": "^2.5.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "gh-pages": "^6.1.1",
+    "prisma": "^5.10.2",
+    "svelte": "^4.2.10",
+    "vite": "^5.1.1"
+  },
+  "dependencies": {
+    "@prisma/client": "5.10.2",
+    "firebase": "^10.8.0",
+    "svelte-routing": "^2.12.0",
+    "uuid": "^9.0.1"
+  }
+}

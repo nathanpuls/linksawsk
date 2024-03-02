@@ -1,0 +1,53 @@
+<script>
+  import Nav from "../components/Nav.svelte";
+  import { onMount } from "svelte";
+  import { page } from "$app/stores";
+  export let siteName = "Linksaw";
+
+  let pageTitle = "";
+
+  function updateTitle() {
+    if (!pageTitle) {
+      document.title = "Linksaw";
+    } else {
+      document.title = `${siteName} | ${pageTitle}`;
+    }
+  }
+
+  onMount(() => {
+    // Subscribe to changes in the $page store
+    const unsubscribe = page.subscribe((value) => {
+      const pageName = value.route.id || "";
+
+      // Split the string by '/'
+      const parts = pageName.split("/");
+
+      // Create the final result by joining the parts with a space
+      pageTitle = parts.join(" ");
+
+      // Capitalize each word in the result string
+      pageTitle = pageTitle.replace(/\b\w/g, (match) => match.toUpperCase());
+
+      // Log the result
+      console.log(pageTitle);
+
+      // Call updateTitle with the updated value
+      updateTitle();
+    });
+
+    // Unsubscribe when the component is destroyed
+    return () => {
+      unsubscribe();
+    };
+  });
+</script>
+
+<Nav></Nav>
+
+<div class="center">
+  <h1>{pageTitle}</h1>
+</div>
+
+<main class="column container">
+  <slot />
+</main>
